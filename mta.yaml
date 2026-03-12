@@ -29,7 +29,6 @@ modules:
       - name: employeeApp-connectivity
       - name: employeeApp-destination
       - name: employeeApp-logging
-      - name: employeeApp-auditlog
 
   - name: employeeApp-db-deployer
     type: hdb
@@ -98,9 +97,4 @@ resources:
     type: org.cloudfoundry.managed-service
     parameters:
       service: application-logs
-      service-plan: standard
-  - name: employeeApp-auditlog
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: auditlog
-      service-plan: premium
+      service-plan: lite
