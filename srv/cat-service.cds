@@ -23,4 +23,15 @@ service EmployeeService {
         'Manager'
     ]
     entity LeaveRequests as projection on employee.LeaveRequests;
+
+    type Supplier {
+        ID          : Integer;
+        CompanyName : String;
+        City        : String;
+        Country     : String;
+    }
+
+    extend service EmployeeService with {
+        function getSuppliers() returns array of Supplier;
+    }
 }

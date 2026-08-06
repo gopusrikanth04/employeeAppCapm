@@ -1,5 +1,67 @@
 {
-  "scopes": [],
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Admin",
+      "description": "Admin"
+    },
+    {
+      "name": "$XSAPPNAME.HRManager",
+      "description": "HRManager"
+    },
+    {
+      "name": "$XSAPPNAME.PayrollManager",
+      "description": "PayrollManager"
+    },
+    {
+      "name": "$XSAPPNAME.Employee",
+      "description": "Employee"
+    },
+    {
+      "name": "$XSAPPNAME.Manager",
+      "description": "Manager"
+    }
+  ],
   "attributes": [],
-  "role-templates": []
+  "role-templates": [
+    {
+      "name": "Admin",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.Admin"
+      ],
+      "attribute-references": []
+    },
+    {
+      "name": "HRManager",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.HRManager"
+      ],
+      "attribute-references": []
+    },
+    {
+      "name": "PayrollManager",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.PayrollManager"
+      ],
+      "attribute-references": []
+    },
+    {
+      "name": "Employee",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.Employee"
+      ],
+      "attribute-references": []
+    },
+    {
+      "name": "Manager",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.Manager"
+      ],
+      "attribute-references": []
+    }
+  ]
 }

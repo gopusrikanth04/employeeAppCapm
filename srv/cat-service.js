@@ -16,7 +16,7 @@ module.exports = cds.service.impl(async function () {
     });
 
 
-    this.before(["CREATE","UPDATE","DELETE"], Employees, (req) => {
+    this.before(["CREATE", "UPDATE", "DELETE"], Employees, (req) => {
         if (!req.user.is("Admin") && !req.user.is("HRManager")) {
             req.reject(403, "Only HR or Admin can manage employees");
         }
@@ -29,8 +29,8 @@ module.exports = cds.service.impl(async function () {
         if (user.is("Manager")) {
             const team = await db.run(
                 SELECT.from(Employees)
-                .columns('ID')
-                .where({ manager_ID: user.id })
+                    .columns('ID')
+                    .where({ manager_ID: user.id })
             );
             const ids = team.map(e => e.ID);
             req.query.where({ employee_ID: { in: ids } });
@@ -46,7 +46,7 @@ module.exports = cds.service.impl(async function () {
 
     this.before("CREATE", LeaveRequests, (req) => {
         if (!req.user.is("Employee")) {
-            req.reject(403,"Only employees can request leave");
+            req.reject(403, "Only employees can request leave");
         }
         req.data.employee_ID = req.user.id;
         req.data.status = "Pending";
@@ -56,7 +56,7 @@ module.exports = cds.service.impl(async function () {
     this.before("UPDATE", LeaveRequests, async (req) => {
         const record = await db.run(
             SELECT.one.from(LeaveRequests)
-            .where({ ID: req.data.ID })
+                .where({ ID: req.data.ID })
         );
         if (!record) req.reject(404);
         if (req.user.is("Admin") || req.user.is("HRManager")) return;
@@ -71,7 +71,7 @@ module.exports = cds.service.impl(async function () {
     this.before("DELETE", LeaveRequests, async (req) => {
         const record = await db.run(
             SELECT.one.from(LeaveRequests)
-            .where({ ID: req.data.ID })
+                .where({ ID: req.data.ID })
         );
         if (!record) req.reject(404);
         if (req.user.is("Admin")) return;
@@ -89,9 +89,9 @@ module.exports = cds.service.impl(async function () {
     });
 
 
-    this.before(["CREATE","UPDATE","DELETE"], Payroll, (req) => {
+    this.before(["CREATE", "UPDATE", "DELETE"], Payroll, (req) => {
         if (!req.user.is("Admin") && !req.user.is("PayrollManager")) {
-            req.reject(403,"Not authorized to manage payroll");
+            req.reject(403, "Not authorized to manage payroll");
         }
     });
 
@@ -104,10 +104,25 @@ module.exports = cds.service.impl(async function () {
     });
 
 
-    this.before(["CREATE","UPDATE","DELETE"], Onboarding, (req) => {
+    this.before(["CREATE", "UPDATE", "DELETE"], Onboarding, (req) => {
         if (!req.user.is("Admin") && !req.user.is("HRManager")) {
-            req.reject(403,"Only HR can manage onboarding");
+            req.reject(403, "Only HR can manage onboarding");
         }
+    });
+
+    const northwind = await cds.connect.to('Northwind');
+
+    this.on('getSuppliers', async () => {
+        const res = await northwind.send({
+            method: 'GET',
+            path: '/Suppliers?$select=SupplierID,CompanyName,City,Country'
+        });
+        return res.value.map(s => ({
+            ID: s.SupplierID,
+            CompanyName: s.CompanyName,
+            City: s.City,
+            Country: s.Country
+        }));
     });
 
 });

@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "A simple CAP project.",
   "dependencies": {
+    "@cap-js/audit-logging": ">=0",
     "@cap-js/hana": "^2",
+    "@sap-cloud-sdk/http-client": "^4.8.0",
+    "@sap-cloud-sdk/resilience": "^4.8.0",
     "@sap/cds": "^9",
     "@sap/xssec": "^4",
-    "express": "^4",
-    "@cap-js/audit-logging": ">=0"
+    "express": "^4"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^2",
@@ -22,11 +24,25 @@
   "cds": {
     "requires": {
       "[production]": {
-        "auth": "xsuaa"
+        "auth": "xsuaa",
+        "connectivity": true,
+        "destinations": true,
+        "application-logging": true
       },
-      "connectivity": true,
-      "destinations": true,
-      "application-logging": true
+      "Northwind": {
+        "kind": "rest",
+        "[development]": {
+          "credentials": {
+            "url": "https://services.odata.org/V4/Northwind/Northwind.svc"
+          }
+        },
+        "[production]": {
+          "credentials": {
+            "destination": "Northwind",
+            "path": "/"
+          }
+        }
+      }
     }
   }
 }
