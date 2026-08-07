@@ -17,6 +17,10 @@ modules:
     parameters:
       instances: 1
       buildpack: nodejs_buildpack
+    properties:
+      RO_DESTINATION:
+        DestinationName: NorthwindDest
+        Path: /
     build-parameters:
       builder: npm-ci
     provides:
