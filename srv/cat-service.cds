@@ -34,4 +34,22 @@ service EmployeeService {
     extend service EmployeeService with {
         function getSuppliers() returns array of Supplier;
     }
+
+    type NorthwindInvoice {
+        OrderID       : Integer;
+        CustomerID    : String;
+        CustomerName  : String;
+        ShipCity      : String;
+        ShipCountry   : String;
+        Salesperson   : String;
+        OrderDate     : DateTime;
+        ProductName   : String;
+        UnitPrice     : Decimal(15, 2);
+        Quantity      : Integer;
+        Discount      : Double;
+        ExtendedPrice : Decimal(15, 2);
+        Freight       : Decimal(15, 2);
+    }
+
+    function     getInvoices()  returns array of NorthwindInvoice;
 }

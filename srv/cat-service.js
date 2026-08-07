@@ -1,4 +1,6 @@
 const cds = require('@sap/cds');
+const { executeHttpRequest } = require('@sap-cloud-sdk/http-client');
+
 
 module.exports = cds.service.impl(async function () {
 
@@ -123,6 +125,21 @@ module.exports = cds.service.impl(async function () {
             City: s.City,
             Country: s.Country
         }));
+    });
+
+
+    const SELECT = 'OrderID,CustomerID,CustomerName,ShipCity,ShipCountry,Salesperson,OrderDate,ProductName,UnitPrice,Quantity,Discount,ExtendedPrice,Freight';
+
+    this.on('getInvoices', async (req) => {
+        const fallback = JSON.parse(process.env.RO_DESTINATION || '{}').DestinationName;
+        const destinationName = req.data.destination || fallback;
+        if (!destinationName) return req.reject(400, 'No destination configured');
+
+        const res = await executeHttpRequest(
+            { destinationName },
+            { method: 'GET', url: `/Invoices?$top=50&$select=${SELECT}` }
+        );
+        return res.data.value;
     });
 
 });
