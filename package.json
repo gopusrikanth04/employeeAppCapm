@@ -13,7 +13,9 @@
   },
   "devDependencies": {
     "@cap-js/sqlite": "^2",
-    "@sap/cds-dk": "^9"
+    "@sap/cds-dk": "^9",
+    "@sap/eslint-plugin-cds": "^4",
+    "eslint": "^10"
   },
   "scripts": {
     "start": "cds-serve",
