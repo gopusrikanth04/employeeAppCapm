@@ -20,7 +20,9 @@
   "scripts": {
     "start": "cds-serve",
     "build": "mbt build",
-    "deploy": "cf deploy mta_archives/employeeApp_1.0.0.mtar -f"
+    "deploy": "cf deploy mta_archives/employeeApp_1.0.0.mtar -f",
+    "lint": "cds lint .",
+    "eslint:sonar": "eslint . --ext .cds,.csn,.csv,.js -f json -o reports/eslint-report.json || true"
   },
   "private": true,
   "cds": {

@@ -35,3 +35,5 @@ mta_archives/
 
 # auto generated wildcard
 .env
+# ESLint / Sonar report output
+reports/
