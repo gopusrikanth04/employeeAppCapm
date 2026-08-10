@@ -128,7 +128,7 @@ module.exports = cds.service.impl(async function () {
     });
 
 
-    const SELECT = 'OrderID,CustomerID,CustomerName,ShipCity,ShipCountry,Salesperson,OrderDate,ProductName,UnitPrice,Quantity,Discount,ExtendedPrice,Freight';
+    const INVOICE_COLS = 'OrderID,CustomerID,CustomerName,ShipCity,ShipCountry,Salesperson,OrderDate,ProductName,UnitPrice,Quantity,Discount,ExtendedPrice,Freight';
 
     this.on('getInvoices', async (req) => {
         const fallback = JSON.parse(process.env.RO_DESTINATION || '{}').DestinationName;
@@ -137,7 +137,7 @@ module.exports = cds.service.impl(async function () {
 
         const res = await executeHttpRequest(
             { destinationName },
-            { method: 'GET', url: `/Invoices?$top=50&$select=${SELECT}` }
+            { method: 'GET', url: `/Invoices?$top=50&$select=${INVOICE_COLS}` }
         );
         return res.data.value;
     });
