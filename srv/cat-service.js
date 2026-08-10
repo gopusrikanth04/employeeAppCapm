@@ -121,9 +121,9 @@ module.exports = cds.service.impl(async function () {
         });
         return res.value.map(s => ({
             ID: s.SupplierID,
-            CompanyName: s.CompanyName,
-            City: s.City,
-            Country: s.Country
+            companyName: s.CompanyName,
+            city: s.City,
+            country: s.Country
         }));
     });
 
@@ -139,7 +139,22 @@ module.exports = cds.service.impl(async function () {
             { destinationName },
             { method: 'GET', url: `/Invoices?$top=50&$select=${INVOICE_COLS}` }
         );
-        return res.data.value;
+        // Map Northwind's PascalCase fields to the service's (lowercase) NorthwindInvoice elements.
+        return res.data.value.map(i => ({
+            orderID:       i.OrderID,
+            customerID:    i.CustomerID,
+            customerName:  i.CustomerName,
+            shipCity:      i.ShipCity,
+            shipCountry:   i.ShipCountry,
+            salesperson:   i.Salesperson,
+            orderDate:     i.OrderDate,
+            productName:   i.ProductName,
+            unitPrice:     i.UnitPrice,
+            quantity:      i.Quantity,
+            discount:      i.Discount,
+            extendedPrice: i.ExtendedPrice,
+            freight:       i.Freight,
+        }));
     });
 
 });

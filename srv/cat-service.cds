@@ -26,9 +26,9 @@ service EmployeeService {
 
     type Supplier {
         ID          : Integer;
-        CompanyName : String;
-        City        : String;
-        Country     : String;
+        companyName : String;
+        city        : String;
+        country     : String;
     }
 
     extend service EmployeeService with {
@@ -36,19 +36,19 @@ service EmployeeService {
     }
 
     type NorthwindInvoice {
-        OrderID       : Integer;
-        CustomerID    : String;
-        CustomerName  : String;
-        ShipCity      : String;
-        ShipCountry   : String;
-        Salesperson   : String;
-        OrderDate     : DateTime;
-        ProductName   : String;
-        UnitPrice     : Decimal(15, 2);
-        Quantity      : Integer;
-        Discount      : Double;
-        ExtendedPrice : Decimal(15, 2);
-        Freight       : Decimal(15, 2);
+        orderID       : Integer;
+        customerID    : String;
+        customerName  : String;
+        shipCity      : String;
+        shipCountry   : String;
+        salesperson   : String;
+        orderDate     : DateTime;
+        productName   : String;
+        unitPrice     : Decimal(15, 2);
+        quantity      : Integer;
+        discount      : Double;
+        extendedPrice : Decimal(15, 2);
+        freight       : Decimal(15, 2);
     }
 
     function     getInvoices()  returns array of NorthwindInvoice;
