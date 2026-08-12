@@ -9,13 +9,13 @@
     "@sap-cloud-sdk/resilience": "^4.8.0",
     "@sap/cds": "^9",
     "@sap/xssec": "^4",
+    "eslint": "^10.8.1",
     "express": "^4"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^2",
     "@sap/cds-dk": "^9",
-    "@sap/eslint-plugin-cds": "^4",
-    "eslint": "^9.39.0"
+    "@sap/eslint-plugin-cds": "^4"
   },
   "scripts": {
     "start": "cds-serve",
