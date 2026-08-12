@@ -19,6 +19,14 @@ steps:
   mavenExecute:
     dockerImage: devxci/mbtci:1.0.14
 
+  # Force a Node 22 build image for the MTA build.
+  # The old piper default (devxci/mbtci-java11-node14) ships Node 14 / npm 6,
+  # which cannot read this project's lockfileVersion 3 package-lock.json and
+  # crashes `npm ci` with "Cannot read property '@cap-js/audit-logging' of undefined".
+  # This project also requires Node >= 20 (@sap/cds ^9, eslint ^10).
+  mtaBuild:
+    dockerImage: 'devxci/mbtci-java21-node22:1.2.47'
+
   artifactPrepareVersion:
     versioningType: cloud_noTag
 
