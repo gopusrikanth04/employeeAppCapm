@@ -22,7 +22,8 @@
     "build": "mbt build",
     "deploy": "cf deploy mta_archives/employeeApp_1.0.0.mtar -f",
     "lint": "cds lint .",
-    "lint:sonar": "eslint . --ext .cds,.csn,.csv,.js -f json -o reports/eslint-report.json || true"
+    "lint:sonar11": "eslint . --ext .cds,.csn,.csv,.js -f json -o reports/eslint-report.json || true",
+    "lint:sonar": "eslint . -f json -o eslint-report.json || true"
   },
   "private": true,
   "cds": {

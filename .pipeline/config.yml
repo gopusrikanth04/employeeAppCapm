@@ -19,13 +19,20 @@ steps:
   mavenExecute:
     dockerImage: devxci/mbtci:1.0.14
 
-  # Force a Node 22 build image for the MTA build.
+  # Force a Node 24 build image for the MTA build.
   # The old piper default (devxci/mbtci-java11-node14) ships Node 14 / npm 6,
   # which cannot read this project's lockfileVersion 3 package-lock.json and
   # crashes `npm ci` with "Cannot read property '@cap-js/audit-logging' of undefined".
-  # This project also requires Node >= 20 (@sap/cds ^9, eslint ^10).
+  # This project requires a modern Node (@sap/cds ^9, eslint ^10).
   mtaBuild:
     dockerImage: 'devxci/mbtci-java21-node24:1.2.47'
+
+  # Run the ESLint stage on Node 24 (piper default node:lts-buster is Node 18,
+  # below eslint 10's engine). Combined with the "ci-lint" script in package.json,
+  # this makes piper run the project's own eslint flat config and write
+  # eslint-report.json to the workspace root, which the ESLint stage archives.
+  npmExecuteLint:
+    dockerImage: 'node:24-bookworm'
 
   artifactPrepareVersion:
     versioningType: cloud_noTag
