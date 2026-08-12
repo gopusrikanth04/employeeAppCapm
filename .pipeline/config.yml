@@ -25,7 +25,7 @@ steps:
   # crashes `npm ci` with "Cannot read property '@cap-js/audit-logging' of undefined".
   # This project also requires Node >= 20 (@sap/cds ^9, eslint ^10).
   mtaBuild:
-    dockerImage: 'devxci/mbtci-java21-node22:1.2.47'
+    dockerImage: 'devxci/mbtci-java21-node24:1.2.47'
 
   artifactPrepareVersion:
     versioningType: cloud_noTag
